@@ -15,14 +15,10 @@ v1.0 - First release
 /**************************************************************************/
 #ifndef MQ135_H
 #define MQ135_H
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 
 /// The load resistance on the board
-#define RLOAD 10.0
+#define RLOAD 2.62 // Китайский датчик MQ-135 (Подстроечный резистор = 2.62 кОм)
 /// Calibration resistance at atmospheric CO2 level
 #define RZERO 76.63
 /// Parameters for calculating ppm of CO2 from sensor resistance
@@ -38,11 +34,12 @@ v1.0 - First release
 /// Atmospheric CO2 level for calibration purposes
 #define ATMOCO2 397.13
 
-class MQ135 {
- private:
+class MQ135
+{
+private:
   uint8_t _pin;
 
- public:
+public:
   MQ135(uint8_t pin);
   float getCorrectionFactor(float t, float h);
   float getResistance();
